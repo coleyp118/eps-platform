@@ -108,6 +108,13 @@ final class EpsClient
         ], fn ($v) => $v !== null);
         $params = array_merge($defaults, $params);
 
+        // Auto-inject a unique client_ref_id for every non-GET request when the
+        // caller omitted it or explicitly passed null. Preserve any caller-
+        // supplied non-null value unchanged. random_bytes() is built into PHP.
+        if ($endpoint['method'] !== 'GET' && !isset($params['client_ref_id'])) {
+            $params['client_ref_id'] = bin2hex(random_bytes(16));
+        }
+
         // Spec-driven guard: every requiredParam (from the API spec, baked into the
         // surface) must be present and non-null before we sign and send.
         $missing = array_values(array_filter(
