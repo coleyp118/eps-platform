@@ -1,5 +1,0 @@
-{
-	"mcpServers": {
-		"eps": { "command": "npx", "args": ["-y", "@ekoindia/eps-context-mcp@latest"] }
-	}
-}

@@ -1,2 +1,0 @@
-# Netlify _redirects file (alternative to netlify.toml)
-/*    /__spa-fallback.html   200
